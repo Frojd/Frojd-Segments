@@ -3,7 +3,7 @@
     <div class="options-lightbox">
         <div class="title">
             <?php _e('Select options', $this->translationDomain); ?>
-            <button type="button" id="wp-link-close" class="close"><span class="screen-reader-text"><?php _e('Close', $this->translationDomain); ?></span></button>
+            <button type="button" class="close"><span class="screen-reader-text"><?php _e('Close', $this->translationDomain); ?></span></button>
         </div>
         <table>
             <tbody>
