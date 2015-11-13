@@ -154,7 +154,7 @@
                 $clone.addClass('segment-item');
 
                 $clone.find('.options').click(function() {
-                    $(this).find('.options-lightbox').addClass('active');
+                    $(this).addClass('active');
                 });
 
                 $clone.find('.options .save-options').click(save_options);
