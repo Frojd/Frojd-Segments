@@ -74,17 +74,8 @@
             $metabox.find('.articles-title-field').keyup(function () {
                 update_list($this.find('.articles .sortable'));
             });
-
-            $metabox.find('.articles.articles-selected .sortable .options:not(.active) .dashicons').click(function(e) {
-                $(this).parents('li').siblings('li.segment-item').find('.options').removeClass('active');
-                $(this).parents('.options').addClass('active');
-            });
-
-            $metabox.find('.articles.articles-selected .sortable .options .close').click(function() {
-                $(this).parents('.options').removeClass('active');
-            });
-
-            $metabox.find('.articles.articles-selected .sortable .options .save-options').click(save_options);
+            
+            options_events($metabox.find('.articles.articles-selected .sortable'));
         });
 
     });
@@ -150,23 +141,30 @@
                 var $clone = $(this).clone();
                 /* Set the width of the helper clone to match the container */
                 $clone.css('width', $('.articles .draggable').width() + 'px');
-
                 $clone.addClass('segment-item');
-
-                $clone.find('.options').click(function() {
-                    $(this).addClass('active');
-                });
-
-                $clone.find('.options .save-options').click(save_options);
+                options_events($clone);
                 return $clone;
             },
             stop: function () {
-                $('.articles .sortable .segment-item').css({
+                var $item = $('.articles .sortable .segment-item');
+                $item.css({
                     width: '',
                     height: ''
                 });
             }
         });
+    }
+
+    function options_events($item) {
+        var $options = $item.find('.options');
+        $item.find('.options:not(.active) .dashicons').click(function() {
+            $(this).closest('li').siblings('li.segment-item').find('.options.active').removeClass('active');
+            $(this).closest('.options').addClass('active');
+        });
+        $options.find('.close').click(function() {
+            $(this).closest('.options').removeClass('active');
+        });
+        $options.find('.save-options').click(save_options);
     }
 
     function sort_by_title(a, b) {
